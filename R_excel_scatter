@@ -1,0 +1,24 @@
+# Load the required libraries
+library(readxl)
+library(ggplot2)
+
+# Let the user choose the Excel file interactively
+excel_file_path <- file.choose()
+
+# Read data from the selected Excel file
+my_data <- read_excel(excel_file_path)
+
+# Ensure that X and Y are numeric variables
+my_data$X <- as.numeric(my_data$X)
+my_data$Y <- as.numeric(my_data$Y)
+
+# Create a scatter plot with continuous limits set to 0 to 100 for both X and Y
+ggplot(my_data, aes(x = X, y = Y)) +
+  geom_point() +
+  labs(
+    x = "X",
+    y = "Y",
+    title = "Scatter Plot of Excel Data"
+  ) +
+  scale_x_continuous(limits = c(0, 100)) +
+  scale_y_continuous(limits = c(0, 100))
